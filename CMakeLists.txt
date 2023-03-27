@@ -3,4 +3,4 @@ project(realtime_embedded_systems C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(realtime_embedded_systems main.c)
+add_executable(es01 es01/main.c)
