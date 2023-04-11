@@ -1,0 +1,15 @@
+In un sistema organizzato secondo il modello a memoria comune viene definita una risorsa astratta R
+sulla quale si puo` operare mediante tre procedure identificate, rispettivamente, da ProcA, ProcB e Reset.
+Le due procedure ProcA e ProcB, operano su variabili diverse della risorsa R e pertanto possono essere
+eseguite concorrentemente tra loro senza generare interferenze. La procedura Reset opera su tutte le
+variabili di R e quindi deve essere eseguita in modo mutuamente esclusivo sia con ProcA che con ProcB.
+
+	1) Se i tre processi PA, PB e PR invocano, rispettivamente, le operazioni ProcA, ProcB e Reset,
+ 	descrivere una tecnica che consente ai processi PA e PB di eseguire le procedure da essi invocate
+ 	senza vincoli reciproci di mutua esclusione, garantendo invece la mutua esclusione con
+ 	l'esecuzione della procedura Reset invocata da PR. Nel risolvere il problema garantire la priorità
+ 	alle esecuzioni di Reset rispetto a quelle di ProcA e ProcB.
+
+ 	2) Qualora i processi che invocano le procedure ProcA e ProcB siano piu` di due (PA1,......PAn e
+ 	PB1,....,PBm) riscrivere la soluzione garantendo anche la mutua esclusione tra due o piu`
+ 	attivazioni di ProcA e tra due o piu` attivazioni di ProcB.
