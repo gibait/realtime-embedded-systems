@@ -1,0 +1,22 @@
+Scrivere un programma multi-thread che simuli il gioco della morra cinese. In tale programma ci devono
+essere 3 thread:
+    - 2 thread simulano i giocatori;
+    - 1 thread simula l'arbitro.
+Il thread arbitro ha il compito di:
+    1. "dare il via" ai due thread giocatori;
+    2. aspettare che ciascuno di essi faccia la propria mossa;
+    3. controllare chi dei due ha vinto, e stampare a video il risultato;
+    4. aspettare la pressione di un tasto da parte dell'utente;
+    5. ricominciare dal punto 1.
+Ognuno dei due thread giocatori deve:
+    1. aspettare il "via" da parte del thread arbitro;
+    2. estrarre a caso la propria mossa;
+    3. stampare a video la propria mossa;
+    4. segnalare al thread arbitro di aver effettuato la mossa;
+    5. tornare al punto 1.
+Per semplicita', assumere che la mossa sia codificata come un numero intero con le seguenti define:
+    #define CARTA 0
+    #define SASSO 1
+    #define FORBICE 2
+e che esista un array di stringhe cosi' definito:
+    char *nomi_mosse[3] = {"carta", "sasso", "forbice"};
