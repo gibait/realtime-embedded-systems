@@ -1,0 +1,11 @@
+Un negozio di barbieri ha tre barbieri, e tre poltrone su cui siedono i clienti quando vengono per tagliarsi
+la barba.
+C'è una sala d'aspetto con un divano (max 4 persone; gli altri aspettano fuori dalla porta).
+C'e' un cassiere, che può servire solamente un cliente (con barba tagliata) alla volta.
+Scrivere il processo cliente che cerca di entrare nel negozio per farsi tagliare la barba,
+Suggerimenti:
+– considerare i barbieri, il cassiere ed il divano come risorse condivise.
+– modellare il processo di taglio barba come un ciclo di SHAVING_ITERATIONS iterazioni
+– modellare il processo di pagamento come un ciclo di PAYING_ITERATIONS iterazioni
+– dopo che un cliente ha pagato esce (th thread muore) oppure, dopo un delay di alcuni secondi (usare la
+primitiva sleep() ), si accoda nuovamente per farsi tagliare la barba.
