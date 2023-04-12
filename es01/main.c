@@ -2,30 +2,8 @@
 // Created by giba on 27/03/23.
 //
 
-/*
-  Siano A, B, C, D ed E le procedure che un insieme di processi P1, P2, ..., PN possono invocare e che
-devono essere eseguite rispettando i seguenti vincoli di sincronizzazione:
-Sono possibili solo due sequenze di esecuzioni delle procedure, sequenze tra loro mutuamente esclusive:
-- la prima sequenza prevede che venga eseguita per prima la procedura A. a cui puo' seguire
-esclusivamente líesecuzione di una o piu' attivazioni concorrenti della procedura B;
-- la seconda sequenza e' costituita dallíesecuzione della procedura C a cui puo' seguire
-esclusivamente l'esecuzione della procedura D, o in alternativa a D della procedura E.
-Una volta terminata una delle due sequenze una nuova sequenza puo' essere di nuovo iniziata.
-utilizzando il meccanismo dei semafori, realizzare le funzioni StartA, EndA, StartB, EndB, .... , StartE,
-EndE che, invocate dai processi clienti P1, P2, ..., PN rispettivamente prima e dopo le corrispondenti
-procedure, garantiscano il rispetto dei precedenti vincoli. Nel risolvere il problema non e' richiesta la
-soluzione ad eventuali problemi di starvation
- */
 
-/*
- * A --> B
- *       B --> B
- *       B --> C
- * C --> D --> A
- *         --> C
- * C --> E --> A
- *         --> C
-*/
+
 
 #include <semaphore.h>
 
