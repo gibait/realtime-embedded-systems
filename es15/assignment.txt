@@ -1,0 +1,9 @@
+Simulare il comportamento di conto corrente bancario sul quale piu` utenti (processi) possono effettuare
+prelievi e/o depositi, con il vincolo che il conto non possa mai andare in rosso (il totale depositato deve
+essere sempre maggiore o uguale a zero. Utilizzare il costrutto monitor per simulare il conto corrente, con
+due procedure: deposito e prelievo..
+Evitare di svegliare un processo quando non si Ë sicuri che possa ripartire.
+Fornire due soluzioni: una che prevede che un processo non sia bloccato quando le condizioni logiche per
+la sua esecuzione sono verificate ed una che prevede che i prelievi siano serviti rigorosamente FIFO,
+cioË che un processo che può essere servito si blocchi se qualcuno ha richiesto un prelievo prima di lui
+che non può essere servito.
