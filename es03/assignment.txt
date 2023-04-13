@@ -1,0 +1,25 @@
+ In un sistema organizzato secondo il modello a memoria comune si vuole realizzare un meccanismo di
+comunicazione tra processi che simula una mailbox a cui M diversi processi mittenti inviano messaggi di
+un tipo T predefinito e da cui prelevano messaggi R diversi processi riceventi.
+Per simulare tale meccanismo si definisce il tipo busta di cui si suppone di usare N istanze (costituenti un
+pool di risorse equivalenti). Un gestore G alloca le buste appartenenti al pool ai processi mittenti i quali,
+per inviare un messaggio eseguono il seguente algoritmo:
+send (messaggio) => 1 - richiesta al gestore G di una busta vuota;
+	2 - inserimento nella busta del messaggio;
+	3 - accodamento della busta nella mailbox;
+Analogamente ogni processo ricevente, per ricevere un messaggio, esegue il seguente algoritmo:
+messaggio = receive() =>
+	1 - estrazione della busta dalla mailbox;
+	2 - estrazione del messaggio dalla busta;
+	3 - rilascio della busta vuota al gestore
+Realizzare il precedente meccanismo utilizzando i semafori e garantendo che la receive sia bloccante
+quando nella mailbox non ci sono buste, e che la send sia bloccante quando non ci sono piu` buste vuote
+disponibili. Indicare, in particolare, come viene definita la busta, il codice del gestore e della mailbox, il
+codice delle due funzioni send e receive.
+
+ Per garantire la ricezione FIFO dei messaggi, organizzare le buste nella mailbox mediante una coda
+concatenata. Il gestore alloca le buste vuote ai processi mittenti adottando una politica prioritaria in base
+ad un parametro priorita` che ciascun processo indica nel momento in cui chiede una busta vuota al
+gestore. La priorita` che ogni processo indica puo` essere 0 (priorita` massima, 1 (priorita` intermedia)
+oppure 2 (priorita` minima) Per richieste specificate con uguale priorita` viene seguita la politica FIFO.
+Si puo` supporre che le code semaforiche siano gestite FIFO.
