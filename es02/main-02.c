@@ -2,7 +2,15 @@
 // Created by giba on 11/04/23.
 //
 
+#include <pthread.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
 #include <semaphore.h>
+
+#define my_printf(x, ...) printf(x, ##__VA_ARGS__); fflush(stdout)
+#define do_something() usleep(rand() % 1000 + 1000)
 
 struct gestore_t {
 	sem_t mutex;
@@ -118,4 +126,79 @@ void end_proc_r() {
 	wake_up_someone();
 
 	sem_post(&gestore.mutex);
+}
+
+void procA(int thread_idx) {
+	start_proc_a();
+
+	my_printf("<%dA", thread_idx);
+	do_something();
+	my_printf("<%dA", thread_idx);
+
+	end_proc_a();
+}
+
+void procB(int thread_idx) {
+	start_proc_b();
+
+	my_printf("<%dB", thread_idx);
+	do_something();
+	my_printf("<%dB", thread_idx);
+
+	end_proc_b();
+}
+
+void Reset(int thread_idx) {
+	start_proc_r();
+
+	my_printf("<%dR", thread_idx);
+	do_something();
+	my_printf("<%dR", thread_idx);
+
+	end_proc_r();
+}
+
+void* thread_body(void* arg)
+{
+	int thread_idx = *((int*) arg);
+	while (1)
+	{
+		int r = rand();
+
+		my_printf("|%d->%s|", thread_idx, (r%3 ==0  ? "A" : (r%3==1 ? "B" : "R")));
+
+		if (r % 3 == 0) procA(thread_idx);
+		else if (r % 3 == 1) procB(thread_idx);
+		else if (r % 3 == 2) Reset(thread_idx);
+	}
+}
+
+
+int main(int argc, char* argv[])
+{
+	srand(time(NULL));
+
+	const int k_num_threads = 10;
+	pthread_t my_threads[k_num_threads];
+
+	gestore_init(&gestore);
+
+	// stores threads id in an array for debugging
+	int thread_ids[k_num_threads];
+	for (int i = 0; i < k_num_threads; i++)
+		thread_ids[i] = i;
+
+	// creates and starts threads
+	for (int i = 0; i < k_num_threads; i++)
+	{
+		if (pthread_create(&my_threads[i], NULL, thread_body, (void*) &thread_ids[i]) != 0)
+		{
+			perror("pthread_create() error\n");
+			return 1;
+		}
+	}
+
+	sleep(60);
+
+	return 0;
 }
